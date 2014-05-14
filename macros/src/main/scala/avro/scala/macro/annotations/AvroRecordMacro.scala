@@ -8,7 +8,6 @@ import scala.reflect.macros.Context
 import scala.language.experimental.macros
 import scala.annotation.StaticAnnotation
 
-import com.gensler.scalavro.types._
 import org.apache.avro.util.Utf8
 import org.apache.avro.Schema
 import org.apache.avro.Schema.Field

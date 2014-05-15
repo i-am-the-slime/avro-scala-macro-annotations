@@ -33,7 +33,7 @@ object AvroRecordMacro {
     case class FieldData(nme: TermName, tpt: Tree, idx: Int)//holds info about the fields of the annotee
 
     //Extender
-    def generateNewBaseTypes =  List( tq"SpecificRecordBase")
+    def generateNewBaseTypes =  List( tq"org.apache.avro.specific.SpecificRecordBase")
 
     //CtorGen
     def generateNewCtors(indexedFields: List[FieldData]) = {
@@ -281,13 +281,14 @@ object AvroRecordMacro {
               .map(f => FieldData(f._1, f._2, f._3)) //(name, type, index)
           } 
 
+          val newImports = List(q"import org.apache.avro.Schema")
           val newVals = generateSchema(name.toString, namespace, first)
 
-          val newCtors       = generateNewCtors(indexed(first))   //a no-arge ctor so `newInstance()` can be used
+          val newCtors       = generateNewCtors(indexed(first))   //a no-arg ctor so `newInstance()` can be used
           val newDefs        = generateNewMethods(name, indexed(first)) //`get`, `put`, and `getSchema` methods 
 
           val newParents     = parents ::: generateNewBaseTypes   //extend SpecificRecord and SpecificRecordBase
-          val newBody        = body ::: newCtors ::: newVals ::: newDefs      //add new members to the body
+          val newBody        = body ::: newImports ::: newCtors ::: newVals ::: newDefs      //add new members to the body
 
           //return an updated class def
           q"$mods class $name[..$tparams](..$first)(...$rest) extends ..$newParents { $self => ..$newBody }" 

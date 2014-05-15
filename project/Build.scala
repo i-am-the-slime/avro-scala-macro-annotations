@@ -8,9 +8,7 @@ object BuildSettings {
     scalacOptions ++= Seq(),
     scalaVersion := "2.10.2",
     resolvers += Resolver.sonatypeRepo("snapshots"),
-    resolvers += "spray" at "http://repo.spray.io/",
-    libraryDependencies += "io.spray" %%  "spray-json" % "1.2.5",
-    libraryDependencies += "com.gensler" %% "scalavro" % "0.4.0",
+    libraryDependencies += "org.apache.avro" % "avro" % "1.7.6",
     libraryDependencies += "org.json4s" %% "json4s-native" % "3.2.6",
     libraryDependencies += "org.specs2" %% "specs2" % "2.2" % "test",
     libraryDependencies += "org.scalamacros" % "quasiquotes" % "2.0.0-M6" cross CrossVersion.full,
@@ -53,7 +51,6 @@ object MyBuild extends Build {
       libraryDependencies ++= Seq(
         Libraries.specs2,
         // Add your additional libraries here (comma-separated)...
-        "org.apache.avro" % "avro" % "1.7.6",
         "org.scalamacros" % "quasiquotes" % "2.0.0-M6" cross CrossVersion.full)
     
      )

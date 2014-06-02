@@ -6,11 +6,8 @@ object BuildSettings {
     organization := "com.julianpeeters",
     version := "0.1-SNAPSHOT",
     scalacOptions ++= Seq(),
-    scalaVersion := "2.10.3",
+    scalaVersion := "2.11.0",
     libraryDependencies += "org.apache.avro" % "avro" % "1.7.6",
-    libraryDependencies += "org.json4s" %% "json4s-native" % "3.2.6",
-    libraryDependencies += "org.specs2" %% "specs2" % "2.2" % "test",
-    libraryDependencies += "org.scalamacros" % "quasiquotes" % "2.0.0-M6" cross CrossVersion.full,
     addCompilerPlugin("org.scalamacros" % "paradise" % "2.0.0" cross CrossVersion.full),
     publishMavenStyle := true,
     publishArtifact in Test := false,
@@ -73,7 +70,7 @@ object MyBuild extends Build {
     settings = buildSettings)
     .settings(
       publishArtifact := false,
-      libraryDependencies ++= Seq("org.specs2" %% "specs2" % "1.13" % "test")
+      libraryDependencies ++= Seq("org.specs2" %% "specs2" % "2.3.12" % "test")
         // Add your additional libraries here (comma-separated)...
      )
      .settings(addCompilerPlugin("org.scalamacros" % "paradise" % "2.0.0" cross CrossVersion.full)
